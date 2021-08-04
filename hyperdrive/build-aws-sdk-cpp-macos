@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ ! -f Makefile.iOS-Pods ]; then
+	echo "error: this script must be run from the root of the repository (for now)"
+	exit 1
+fi
+
+AWSSDKCPP_ROOT=src/3rdparty/aws-sdk-cpp
+cd ${AWSSDKCPP_ROOT}
+
+AWSSDKCPP_BUILD_DIR=build
+AWSSDKCPP_BUILD_TS=${AWSSDKCPP_BUILD_DIR}/last-build.timestamp
+AWSSDKCPP_THIS_SCRIPT=hyperdrive/build-aws-sdk-cpp-macos
+
+mkdir -p ${AWSSDKCPP_BUILD_DIR}
+
+if [ ! -d ${AWSSDKCPP_BUILD_DIR}/AWSSDK.xcodeproj ] || [ ${AWSSDKCPP_THIS_SCRIPT} -nt ${AWSSDKCPP_BUILD_TS} ]; then
+	# https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/cmake-params.html
+	pushd ${AWSSDKCPP_BUILD_DIR} && cmake .. -G Xcode -DTARGET_ARCH="APPLE" -DCMAKE_BUILD_TYPE=Debug -DBUILD_ONLY="lambda;s3" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF && popd
+fi
+
+pushd ${AWSSDKCPP_BUILD_DIR} && xcodebuild -target ALL_BUILD && popd
+touch ${AWSSDKCPP_BUILD_TS}
