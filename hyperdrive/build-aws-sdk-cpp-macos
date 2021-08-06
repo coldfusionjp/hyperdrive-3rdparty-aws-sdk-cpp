@@ -5,19 +5,43 @@ if [ ! -f Makefile.iOS-Pods ]; then
 	exit 1
 fi
 
+AWSSDKCPP_CLIENTS="lambda;s3"
+AWSSDKCPP_CONFIGS=(Debug MinSizeRel)
 AWSSDKCPP_ROOT=src/3rdparty/aws-sdk-cpp
 cd ${AWSSDKCPP_ROOT}
 
-AWSSDKCPP_BUILD_DIR=build
-AWSSDKCPP_BUILD_TS=${AWSSDKCPP_BUILD_DIR}/last-build.timestamp
 AWSSDKCPP_THIS_SCRIPT=hyperdrive/build-aws-sdk-cpp-macos
 
-mkdir -p ${AWSSDKCPP_BUILD_DIR}
+do_build()
+{
+	# create build directory
+	AWSSDKCPP_BUILD_DIR=hyperdrive/build/build-$1
+	AWSSDKCPP_BUILD_TS=${AWSSDKCPP_BUILD_DIR}/last-build.timestamp
+	mkdir -p ${AWSSDKCPP_BUILD_DIR}
 
-if [ ! -d ${AWSSDKCPP_BUILD_DIR}/AWSSDK.xcodeproj ] || [ ${AWSSDKCPP_THIS_SCRIPT} -nt ${AWSSDKCPP_BUILD_TS} ]; then
-	# https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/cmake-params.html
-	pushd ${AWSSDKCPP_BUILD_DIR} && cmake .. -G Xcode -DTARGET_ARCH="APPLE" -DCMAKE_BUILD_TYPE=Debug -DBUILD_ONLY="lambda;s3" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF && popd
-fi
+	# run cmake only if necessary
+	if [ ! -d ${AWSSDKCPP_BUILD_DIR}/AWSSDK.xcodeproj ] || [ ${AWSSDKCPP_THIS_SCRIPT} -nt ${AWSSDKCPP_BUILD_TS} ]; then
+		# https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/cmake-params.html
+		if [ "$1" = "Debug" ]; then
+			AWSSDKCPP_CMAKE_FLAGS=""
+		else
+			AWSSDKCPP_CMAKE_FLAGS="-DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON"
+		fi
 
-pushd ${AWSSDKCPP_BUILD_DIR} && xcodebuild -target ALL_BUILD && popd
-touch ${AWSSDKCPP_BUILD_TS}
+		( set -x ; cd ${AWSSDKCPP_BUILD_DIR} ; cmake ../../.. -G Xcode -DCMAKE_BUILD_TYPE=$1 -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13 -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" -DBUILD_ONLY="${AWSSDKCPP_CLIENTS}" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF ${AWSSDKCPP_CMAKE_FLAGS} )
+	fi
+
+	# ensure our custom headers are used instead of any generated ones
+	cp -p hyperdrive/aws-cpp-sdk-core/include/aws/core/SDKConfig.h aws-cpp-sdk-core/include/aws/core/SDKConfig.h
+	cp -p hyperdrive/crt/aws-crt-cpp/include/aws/crt/Config.h crt/aws-crt-cpp/include/aws/crt/Config.h
+	cp -p hyperdrive/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h
+
+	# build without any ASAN/UBSAN support (since the active scheme from Xcode is passed into the environment, it's easier to just disable it completely) and create timestamp
+	( cd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO )
+	touch ${AWSSDKCPP_BUILD_TS}
+}
+
+for i in ${AWSSDKCPP_CONFIGS[@]}
+do
+	do_build $i
+done
