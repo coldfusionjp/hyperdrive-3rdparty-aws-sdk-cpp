@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env zsh
+
+set -eu
 
 if [ ! -f Makefile.iOS-Pods ]; then
 	echo "error: this script must be run from the root of the repository (for now)"
