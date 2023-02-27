@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXFileReference section */
+		76049DEA29AC943C001A724D /* libaws-sdk-cpp-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libaws-sdk-cpp-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		76049DE129AC943C001A724D = {
+			isa = PBXGroup;
+			children = (
+				76049DEB29AC943C001A724D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		76049DEB29AC943C001A724D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76049DEA29AC943C001A724D /* libaws-sdk-cpp-macOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76049DE929AC943C001A724D /* aws-sdk-cpp-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76049DEE29AC943C001A724D /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */;
+			buildPhases = (
+				76049E0229AC97D9001A724D /* Run cmake */,
+				76049E0129AC96F9001A724D /* Copy custom headers */,
+				76049E0329ACA0A3001A724D /* Build aws-sdk-cpp */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "aws-sdk-cpp-macOS";
+			productName = "aws-sdk-cpp";
+			productReference = 76049DEA29AC943C001A724D /* libaws-sdk-cpp-macOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76049DE229AC943C001A724D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					76049DE929AC943C001A724D = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 76049DE529AC943C001A724D /* Build configuration list for PBXProject "aws-sdk-cpp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76049DE129AC943C001A724D;
+			productRefGroup = 76049DEB29AC943C001A724D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76049DE929AC943C001A724D /* aws-sdk-cpp-macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		76049E0129AC96F9001A724D /* Copy custom headers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+				"crt/aws-crt-cpp/include/aws/crt/Config.h",
+				"crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
+			);
+			name = "Copy custom headers";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"../aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+				"../crt/aws-crt-cpp/include/aws/crt/Config.h",
+				"../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "cp -p aws-cpp-sdk-core/include/aws/core/SDKConfig.h ../aws-cpp-sdk-core/include/aws/core/SDKConfig.h\ncp -p crt/aws-crt-cpp/include/aws/crt/Config.h ../crt/aws-crt-cpp/include/aws/crt/Config.h\ncp -p crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h ../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h\n";
+			showEnvVarsInLog = 0;
+		};
+		76049E0229AC97D9001A724D /* Run cmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run cmake";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"build/build-prod/AWSSDK.xcodeproj",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "AWSSDKCPP_CLIENTS=\"lambda;s3\"\nAWSSDKCPP_BUILD_DIR=build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; cmake ../../.. -G Xcode -DCMAKE_BUILD_TYPE=MinSizeRel -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13 -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON\n";
+		};
+		76049E0329ACA0A3001A724D /* Build aws-sdk-cpp */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"build/build-prod/AWSSDK.xcodeproj",
+			);
+			name = "Build aws-sdk-cpp";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"build/build-prod/build/aws-cpp-sdk-s3.build/Debug/Objects-normal/arm64/Binary/libaws-cpp-sdk-s3.a",
+				"build/build-prod/build/aws-cpp-sdk-lambda.build/Debug/Objects-normal/arm64/Binary/libaws-cpp-sdk-lambda.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "AWSSDKCPP_BUILD_DIR=build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		76049DEC29AC943C001A724D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		76049DED29AC943C001A724D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		76049DEF29AC943C001A724D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		76049DF029AC943C001A724D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76049DE529AC943C001A724D /* Build configuration list for PBXProject "aws-sdk-cpp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76049DEC29AC943C001A724D /* Debug */,
+				76049DED29AC943C001A724D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76049DEE29AC943C001A724D /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76049DEF29AC943C001A724D /* Debug */,
+				76049DF029AC943C001A724D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 76049DE229AC943C001A724D /* Project object */;
+}
