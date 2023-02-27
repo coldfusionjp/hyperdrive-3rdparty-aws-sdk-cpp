@@ -7,35 +7,46 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		76049DEA29AC943C001A724D /* libaws-sdk-cpp-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libaws-sdk-cpp-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76049E0F29ACC380001A724D /* aws_sdk_cpp_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aws_sdk_cpp_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		76049DE129AC943C001A724D = {
+		76049E0529ACC380001A724D = {
 			isa = PBXGroup;
 			children = (
-				76049DEB29AC943C001A724D /* Products */,
+				76049E1029ACC380001A724D /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		76049DEB29AC943C001A724D /* Products */ = {
+		76049E1029ACC380001A724D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				76049DEA29AC943C001A724D /* libaws-sdk-cpp-macOS.a */,
+				76049E0F29ACC380001A724D /* aws_sdk_cpp_macOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		76049E0A29ACC380001A724D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		76049DE929AC943C001A724D /* aws-sdk-cpp-macOS */ = {
+		76049E0E29ACC380001A724D /* aws-sdk-cpp-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76049DEE29AC943C001A724D /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */;
+			buildConfigurationList = 76049E1629ACC380001A724D /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */;
 			buildPhases = (
-				76049E0229AC97D9001A724D /* Run cmake */,
-				76049E0129AC96F9001A724D /* Copy custom headers */,
-				76049E0329ACA0A3001A724D /* Build aws-sdk-cpp */,
+				76049E0A29ACC380001A724D /* Headers */,
+				76049E2629ACC41A001A724D /* Run cmake */,
+				76049E2729ACC4D3001A724D /* Copy custom headers */,
+				76049E2829ACC56D001A724D /* Build aws-sdk-cpp */,
 			);
 			buildRules = (
 			);
@@ -43,24 +54,24 @@
 			);
 			name = "aws-sdk-cpp-macOS";
 			productName = "aws-sdk-cpp";
-			productReference = 76049DEA29AC943C001A724D /* libaws-sdk-cpp-macOS.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 76049E0F29ACC380001A724D /* aws_sdk_cpp_macOS.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		76049DE229AC943C001A724D /* Project object */ = {
+		76049E0629ACC380001A724D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					76049DE929AC943C001A724D = {
+					76049E0E29ACC380001A724D = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 76049DE529AC943C001A724D /* Build configuration list for PBXProject "aws-sdk-cpp" */;
+			buildConfigurationList = 76049E0929ACC380001A724D /* Build configuration list for PBXProject "aws-sdk-cpp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -68,43 +79,18 @@
 				en,
 				Base,
 			);
-			mainGroup = 76049DE129AC943C001A724D;
-			productRefGroup = 76049DEB29AC943C001A724D /* Products */;
+			mainGroup = 76049E0529ACC380001A724D;
+			productRefGroup = 76049E1029ACC380001A724D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				76049DE929AC943C001A724D /* aws-sdk-cpp-macOS */,
+				76049E0E29ACC380001A724D /* aws-sdk-cpp-macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		76049E0129AC96F9001A724D /* Copy custom headers */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
-				"crt/aws-crt-cpp/include/aws/crt/Config.h",
-				"crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
-			);
-			name = "Copy custom headers";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"../aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
-				"../crt/aws-crt-cpp/include/aws/crt/Config.h",
-				"../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/zsh;
-			shellScript = "cp -p aws-cpp-sdk-core/include/aws/core/SDKConfig.h ../aws-cpp-sdk-core/include/aws/core/SDKConfig.h\ncp -p crt/aws-crt-cpp/include/aws/crt/Config.h ../crt/aws-crt-cpp/include/aws/crt/Config.h\ncp -p crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h ../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h\n";
-			showEnvVarsInLog = 0;
-		};
-		76049E0229AC97D9001A724D /* Run cmake */ = {
+		76049E2629ACC41A001A724D /* Run cmake */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -117,13 +103,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"build/build-prod/AWSSDK.xcodeproj",
+				"$(PROJECT_DIR)/build/build-prod/AWSSDK.xcodeproj",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "AWSSDKCPP_CLIENTS=\"lambda;s3\"\nAWSSDKCPP_BUILD_DIR=build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; cmake ../../.. -G Xcode -DCMAKE_BUILD_TYPE=MinSizeRel -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13 -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON\n";
+			shellScript = "AWSSDKCPP_CLIENTS=\"lambda;s3\"\nAWSSDKCPP_BUILD_DIR=${PROJECT_DIR}/build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; cmake ../../.. -G Xcode -DCMAKE_BUILD_TYPE=\"MinSizeRel\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON\n";
+			showEnvVarsInLog = 0;
 		};
-		76049E0329ACA0A3001A724D /* Build aws-sdk-cpp */ = {
+		76049E2729ACC4D3001A724D /* Copy custom headers */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,23 +118,49 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"build/build-prod/AWSSDK.xcodeproj",
+				"$(PROJECT_DIR)/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+				"$(PROJECT_DIR)/crt/aws-crt-cpp/include/aws/crt/Config.h",
+				"$(PROJECT_DIR)/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
+			);
+			name = "Copy custom headers";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(PROJECT_DIR)/../aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+				"$(PROJECT_DIR)/../crt/aws-crt-cpp/include/aws/crt/Config.h",
+				"$(PROJECT_DIR)/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "cp -p ${PROJECT_DIR}/aws-cpp-sdk-core/include/aws/core/SDKConfig.h ${PROJECT_DIR}/../aws-cpp-sdk-core/include/aws/core/SDKConfig.h\ncp -p ${PROJECT_DIR}/crt/aws-crt-cpp/include/aws/crt/Config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/include/aws/crt/Config.h\ncp -p ${PROJECT_DIR}/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h\n";
+			showEnvVarsInLog = 0;
+		};
+		76049E2829ACC56D001A724D /* Build aws-sdk-cpp */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/build/build-prod/AWSSDK.xcodeproj",
 			);
 			name = "Build aws-sdk-cpp";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"build/build-prod/build/aws-cpp-sdk-s3.build/Debug/Objects-normal/arm64/Binary/libaws-cpp-sdk-s3.a",
-				"build/build-prod/build/aws-cpp-sdk-lambda.build/Debug/Objects-normal/arm64/Binary/libaws-cpp-sdk-lambda.a",
+				"$(PROJECT_DIR)/build/build-prod/build/aws-cpp-sdk-s3.build/Debug/Objects-normal/arm64/Binary/libaws-cpp-sdk-s3.a",
+				"$(PROJECT_DIR)/build/build-prod/build/aws-cpp-sdk-lambda.build/Debug/Objects-normal/arm64/Binary/libaws-cpp-sdk-lambda.a",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/zsh;
-			shellScript = "AWSSDKCPP_BUILD_DIR=build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO\n";
+			shellPath = /bin/sh;
+			shellScript = "AWSSDKCPP_BUILD_DIR=${PROJECT_DIR}/build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		76049DEC29AC943C001A724D /* Debug */ = {
+		76049E1429ACC380001A724D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -180,6 +193,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -197,15 +211,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		76049DED29AC943C001A724D /* Release */ = {
+		76049E1529ACC380001A724D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -238,6 +256,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -249,55 +268,107 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		76049DEF29AC943C001A724D /* Debug */ = {
+		76049E1729ACC380001A724D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.coldfusion.hyperdrive.aws-sdk-cpp";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		76049DF029AC943C001A724D /* Release */ = {
+		76049E1829ACC380001A724D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.coldfusion.hyperdrive.aws-sdk-cpp";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		76049DE529AC943C001A724D /* Build configuration list for PBXProject "aws-sdk-cpp" */ = {
+		76049E0929ACC380001A724D /* Build configuration list for PBXProject "aws-sdk-cpp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				76049DEC29AC943C001A724D /* Debug */,
-				76049DED29AC943C001A724D /* Release */,
+				76049E1429ACC380001A724D /* Debug */,
+				76049E1529ACC380001A724D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76049DEE29AC943C001A724D /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */ = {
+		76049E1629ACC380001A724D /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				76049DEF29AC943C001A724D /* Debug */,
-				76049DF029AC943C001A724D /* Release */,
+				76049E1729ACC380001A724D /* Debug */,
+				76049E1829ACC380001A724D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 76049DE229AC943C001A724D /* Project object */;
+	rootObject = 76049E0629ACC380001A724D /* Project object */;
 }
