@@ -1,0 +1,78 @@
+{
+	"project": {
+		"name": "aws-sdk-cpp",
+		"type": "framework",
+		"skipProjectTypes": [ "VisualStudio", "Makefile" ]
+	},
+	"platforms": {
+		"macOS": {
+			"projectType": "Xcode",
+			"buildSteps": [
+				{
+					"name": "Run cmake",
+					"shell": "/bin/zsh",
+					"script": [
+						"AWSSDKCPP_CLIENTS=\"lambda;s3\"",
+						"AWSSDKCPP_BUILD_DIR=${PROJECT_DIR}/build/build-prod",
+						"cd ${AWSSDKCPP_BUILD_DIR} ; cmake ../../.. -G Xcode -DCMAKE_BUILD_TYPE=\"MinSizeRel\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON"
+					],
+					"outputs": [
+						"$(PROJECT_DIR)/build/build-prod/AWSSDK.xcodeproj"
+					]
+				},
+				{
+					"name": "Copy custom headers",
+					"script": [
+						"cp -p ${PROJECT_DIR}/aws-cpp-sdk-core/include/aws/core/SDKConfig.h ${PROJECT_DIR}/../aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+						"cp -p ${PROJECT_DIR}/crt/aws-crt-cpp/include/aws/crt/Config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/include/aws/crt/Config.h",
+						"cp -p ${PROJECT_DIR}/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
+					],
+					"inputs": [
+						"$(PROJECT_DIR)/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+						"$(PROJECT_DIR)/crt/aws-crt-cpp/include/aws/crt/Config.h",
+						"$(PROJECT_DIR)/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
+					],
+					"outputs": [
+						"$(PROJECT_DIR)/../aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+						"$(PROJECT_DIR)/../crt/aws-crt-cpp/include/aws/crt/Config.h",
+						"$(PROJECT_DIR)/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
+					]
+				},
+				{
+					"name": "Build aws-sdk-cpp",
+					"script": [
+						"AWSSDKCPP_BUILD_DIR=${PROJECT_DIR}/build/build-prod"
+						"cd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO"
+					],
+					"inputs": [
+						"$(PROJECT_DIR)/build/build-prod/AWSSDK.xcodeproj"
+					],
+					"outputs": [
+						"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
+						"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-lambda/Debug/libaws-cpp-sdk-lambda.a"
+					]
+				},
+				{
+					"name": "Create XCFramework",
+					"script": [
+						"rm -rf ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
+						"xcodebuild -create-xcframework -library ${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a -headers ${PROJECT_DIR}/../aws-cpp-sdk-s3/include -output ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
+					],
+					"inputs": [
+						"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
+						"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-lambda/Debug/libaws-cpp-sdk-lambda.a"
+					],
+					"outputs": [
+						"$(PROJECT_DIR)/build/aws-sdk-cpp.framework"
+					]
+				}
+			],
+			"deploymentTarget": "10.13",
+			"generateInfoPlistFile": true
+		}
+	},
+	"configurations": {
+		"Debug": {},
+		"Release": {}
+	}
+}
