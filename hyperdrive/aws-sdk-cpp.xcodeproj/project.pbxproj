@@ -129,17 +129,16 @@
 			);
 			inputPaths = (
 				"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
-				"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-lambda/Debug/libaws-cpp-sdk-lambda.a",
 			);
 			name = "Create XCFramework";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/build/aws-sdk-cpp.framework",
+				"$(PROJECT_DIR)/build/aws-sdk-cpp.xcframework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\nxcodebuild -create-xcframework -library ${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a -headers ${PROJECT_DIR}/../aws-cpp-sdk-s3/include -output ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\n";
+			shellScript = "rm -rf tmp-create-xcframework-540878794 ; mkdir -p tmp-create-xcframework-540878794/headers\ncp -Rp ${PROJECT_DIR}/../aws-cpp-sdk-core/include/. tmp-create-xcframework-540878794/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/include/. tmp-create-xcframework-540878794/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/. tmp-create-xcframework-540878794/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-io/include/. tmp-create-xcframework-540878794/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-mqtt/include/. tmp-create-xcframework-540878794/headers\ncp -Rp ${PROJECT_DIR}/../aws-cpp-sdk-s3/include/. tmp-create-xcframework-540878794/headers\nrm -rf ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\nxcodebuild -create-xcframework -library ${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a -headers tmp-create-xcframework-540878794/headers -output ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\nrm -rf tmp-create-xcframework-540878794\n";
 			showEnvVarsInLog = 0;
 		};
 		FCD7BDAAF0A4165DB38FA397 /* Build aws-sdk-cpp */ = {

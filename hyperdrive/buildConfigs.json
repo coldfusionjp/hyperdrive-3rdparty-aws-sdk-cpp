@@ -54,17 +54,19 @@
 				},
 				{
 					"name": "Create XCFramework",
-					"script": [
-						"rm -rf ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
-						"xcodebuild -create-xcframework -library ${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a -headers ${PROJECT_DIR}/../aws-cpp-sdk-s3/include -output ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
+					"type": "create-xcframework",
+					"headers": [
+						"${PROJECT_DIR}/../aws-cpp-sdk-core/include",
+						"${PROJECT_DIR}/../crt/aws-crt-cpp/include",
+						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include",
+						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-io/include",
+						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-mqtt/include",
+						"${PROJECT_DIR}/../aws-cpp-sdk-s3/include"
 					],
-					"inputs": [
-						"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
-						"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-lambda/Debug/libaws-cpp-sdk-lambda.a"
+					"libraries": [
+						"${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a"
 					],
-					"outputs": [
-						"$(PROJECT_DIR)/build/aws-sdk-cpp.framework"
-					]
+					"output": "${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
 				}
 			],
 			"deploymentTarget": "10.13",
