@@ -64,7 +64,19 @@
 						"${PROJECT_DIR}/../aws-cpp-sdk-s3/include"
 					],
 					"libraries": [
-						"${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a"
+						"${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a",
+						"${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/Debug/libaws-crt-cpp.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-checksums/Debug/libaws-checksums.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-auth/Debug/libaws-c-auth.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-cal/Debug/libaws-c-cal.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-common/Debug/libaws-c-common.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-compression/Debug/libaws-c-compression.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-http/Debug/libaws-c-http.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-io/Debug/libaws-c-io.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-mqtt/Debug/libaws-c-mqtt.a",
+						"${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-s3/Debug/libaws-c-s3.a",
+						"${PROJECT_DIR}/build/build-prod/lib/Debug/libaws-c-event-stream.a"
 					],
 					"output": "${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
 				}
