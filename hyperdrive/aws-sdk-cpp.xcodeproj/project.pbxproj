@@ -6,9 +6,22 @@
 	objectVersion = 56;
 	objects = {
 
-/* Begin PBXFileReference section */
-		4F778874F7DFD2CEB629DEED /* aws-sdk-cpp-macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "aws-sdk-cpp-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
+/* Begin PBXAggregateTarget section */
+		5A0D2516B35F2CBAC27B1049 /* aws-sdk-cpp-macOS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B0D3E3F4D5F1675883F8A9BF /* Build configuration list for PBXAggregateTarget "aws-sdk-cpp-macOS" */;
+			buildPhases = (
+				444B37D60163C106A68350B7 /* Run cmake */,
+				A465DDFD36AC4342AE5AD810 /* Copy custom headers */,
+				FCD7BDAAF0A4165DB38FA397 /* Build aws-sdk-cpp */,
+				A87FA1AA66B1CE43C12C1539 /* Create XCFramework */,
+			);
+			dependencies = (
+			);
+			name = "aws-sdk-cpp-macOS";
+			productName = "aws-sdk-cpp-macOS";
+		};
+/* End PBXAggregateTarget section */
 
 /* Begin PBXGroup section */
 		E4943FAF0436D628DB470910 = {
@@ -21,33 +34,11 @@
 		EB6C19878E6CBBFA194EF697 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F778874F7DFD2CEB629DEED /* aws-sdk-cpp-macOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		B7834FF84825A9F45D8758CF /* aws-sdk-cpp-macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 90AC36D8FA0AFBB2887FC0D8 /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */;
-			buildPhases = (
-				444B37D60163C106A68350B7 /* Run cmake */,
-				A465DDFD36AC4342AE5AD810 /* Copy custom headers */,
-				FCD7BDAAF0A4165DB38FA397 /* Build aws-sdk-cpp */,
-				A87FA1AA66B1CE43C12C1539 /* Create XCFramework */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "aws-sdk-cpp-macOS";
-			productName = "aws-sdk-cpp-macOS";
-			productReference = 4F778874F7DFD2CEB629DEED /* aws-sdk-cpp-macOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		5AA7B0F1642021E580E9C9AE /* Project object */ = {
@@ -69,7 +60,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B7834FF84825A9F45D8758CF /* aws-sdk-cpp-macOS */,
+				5A0D2516B35F2CBAC27B1049 /* aws-sdk-cpp-macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -181,22 +172,16 @@
 		1AC7B2A0EF714526392F0D80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				SDKROOT = macosx;
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		437F30739D8D91166FC8FBE7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				SDKROOT = macosx;
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -246,7 +231,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CPLUSPLUSFLAGS = (
@@ -306,7 +291,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CPLUSPLUSFLAGS = (
@@ -332,7 +317,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90AC36D8FA0AFBB2887FC0D8 /* Build configuration list for PBXNativeTarget "aws-sdk-cpp-macOS" */ = {
+		B0D3E3F4D5F1675883F8A9BF /* Build configuration list for PBXAggregateTarget "aws-sdk-cpp-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1AC7B2A0EF714526392F0D80 /* Debug */,

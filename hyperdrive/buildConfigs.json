@@ -1,7 +1,7 @@
 {
 	"project": {
 		"name": "aws-sdk-cpp",
-		"type": "framework",
+		"type": "generic",
 		"skipProjectTypes": [ "VisualStudio", "Makefile" ]
 	},
 	"platforms": {
@@ -80,9 +80,7 @@
 					],
 					"output": "${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
 				}
-			],
-			"deploymentTarget": "10.13",
-			"generateInfoPlistFile": true
+			]
 		}
 	},
 	"configurations": {
