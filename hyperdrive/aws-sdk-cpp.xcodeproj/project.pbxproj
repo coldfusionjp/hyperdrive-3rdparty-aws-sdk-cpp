@@ -12,7 +12,6 @@
 			buildConfigurationList = B0D3E3F4D5F1675883F8A9BF /* Build configuration list for PBXAggregateTarget "aws-sdk-cpp-macOS" */;
 			buildPhases = (
 				444B37D60163C106A68350B7 /* Run cmake */,
-				A465DDFD36AC4342AE5AD810 /* Copy custom headers */,
 				FCD7BDAAF0A4165DB38FA397 /* Build aws-sdk-cpp */,
 				A87FA1AA66B1CE43C12C1539 /* Create XCFramework */,
 			);
@@ -74,6 +73,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(PROJECT_DIR)/CMakeLists.txt",
 			);
 			name = "Run cmake";
 			outputFileListPaths = (
@@ -84,31 +84,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
 			shellScript = "AWSSDKCPP_CLIENTS=\"lambda;s3\"\nAWSSDKCPP_BUILD_DIR=${TARGET_BUILD_DIR}/aws-sdk-cpp\ncd ${AWSSDKCPP_BUILD_DIR} ; cmake ${PROJECT_DIR}/.. -G Xcode -DCMAKE_BUILD_TYPE=\"MinSizeRel\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON\n";
-			showEnvVarsInLog = 0;
-		};
-		A465DDFD36AC4342AE5AD810 /* Copy custom headers */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(PROJECT_DIR)/src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
-				"$(PROJECT_DIR)/crt/aws-crt-cpp/include/aws/crt/Config.h",
-				"$(PROJECT_DIR)/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
-			);
-			name = "Copy custom headers";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(PROJECT_DIR)/../src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
-				"$(PROJECT_DIR)/../crt/aws-crt-cpp/include/aws/crt/Config.h",
-				"$(PROJECT_DIR)/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -p ${PROJECT_DIR}/src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h ${PROJECT_DIR}/../src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h\ncp -p ${PROJECT_DIR}/crt/aws-crt-cpp/include/aws/crt/Config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/include/aws/crt/Config.h\ncp -p ${PROJECT_DIR}/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h\n";
 			showEnvVarsInLog = 0;
 		};
 		A87FA1AA66B1CE43C12C1539 /* Create XCFramework */ = {

@@ -16,26 +16,11 @@
 						"AWSSDKCPP_BUILD_DIR=${TARGET_BUILD_DIR}/aws-sdk-cpp",
 						"cd ${AWSSDKCPP_BUILD_DIR} ; cmake ${PROJECT_DIR}/.. -G Xcode -DCMAKE_BUILD_TYPE=\"MinSizeRel\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON"
 					],
+					"inputs": [
+						"$(PROJECT_DIR)/CMakeLists.txt"	
+					],
 					"outputs": [
 						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/AWSSDK.xcodeproj"
-					]
-				},
-				{
-					"name": "Copy custom headers",
-					"script": [
-						"cp -p ${PROJECT_DIR}/src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h ${PROJECT_DIR}/../src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
-						"cp -p ${PROJECT_DIR}/crt/aws-crt-cpp/include/aws/crt/Config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/include/aws/crt/Config.h",
-						"cp -p ${PROJECT_DIR}/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
-					],
-					"inputs": [
-						"$(PROJECT_DIR)/src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
-						"$(PROJECT_DIR)/crt/aws-crt-cpp/include/aws/crt/Config.h",
-						"$(PROJECT_DIR)/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
-					],
-					"outputs": [
-						"$(PROJECT_DIR)/../src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
-						"$(PROJECT_DIR)/../crt/aws-crt-cpp/include/aws/crt/Config.h",
-						"$(PROJECT_DIR)/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
 					]
 				},
 				{
