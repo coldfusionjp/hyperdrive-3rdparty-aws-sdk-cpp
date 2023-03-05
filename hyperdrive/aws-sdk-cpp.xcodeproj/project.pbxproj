@@ -79,11 +79,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/build/build-prod/AWSSDK.xcodeproj",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/AWSSDK.xcodeproj",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "AWSSDKCPP_CLIENTS=\"lambda;s3\"\nAWSSDKCPP_BUILD_DIR=${PROJECT_DIR}/build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; cmake ../../.. -G Xcode -DCMAKE_BUILD_TYPE=\"MinSizeRel\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON\n";
+			shellScript = "AWSSDKCPP_CLIENTS=\"lambda;s3\"\nAWSSDKCPP_BUILD_DIR=${TARGET_BUILD_DIR}/aws-sdk-cpp\ncd ${AWSSDKCPP_BUILD_DIR} ; cmake ${PROJECT_DIR}/.. -G Xcode -DCMAKE_BUILD_TYPE=\"MinSizeRel\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON\n";
 			showEnvVarsInLog = 0;
 		};
 		A465DDFD36AC4342AE5AD810 /* Copy custom headers */ = {
@@ -119,19 +119,19 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a",
-				"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/Debug/libaws-crt-cpp.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-checksums/Debug/libaws-checksums.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-auth/Debug/libaws-c-auth.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-cal/Debug/libaws-c-cal.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-common/Debug/libaws-c-common.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-compression/Debug/libaws-c-compression.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-http/Debug/libaws-c-http.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-io/Debug/libaws-c-io.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-mqtt/Debug/libaws-c-mqtt.a",
-				"$(PROJECT_DIR)/build/build-prod/crt/aws-crt-cpp/crt/aws-c-s3/Debug/libaws-c-s3.a",
-				"$(PROJECT_DIR)/build/build-prod/lib/Debug/libaws-c-event-stream.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/Debug/libaws-crt-cpp.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-checksums/Debug/libaws-checksums.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-auth/Debug/libaws-c-auth.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-cal/Debug/libaws-c-cal.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-common/Debug/libaws-c-common.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-compression/Debug/libaws-c-compression.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-http/Debug/libaws-c-http.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-io/Debug/libaws-c-io.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-mqtt/Debug/libaws-c-mqtt.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-s3/Debug/libaws-c-s3.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/lib/Debug/libaws-c-event-stream.a",
 			);
 			name = "Create XCFramework";
 			outputFileListPaths = (
@@ -141,7 +141,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf tmp-create-xcframework ; mkdir -p tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../aws-cpp-sdk-core/include/. tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/include/. tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/. tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-io/include/. tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-mqtt/include/. tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../aws-cpp-sdk-s3/include/. tmp-create-xcframework/headers\nlibtool -static -o tmp-create-xcframework/libaws-sdk-cpp.a ${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a ${PROJECT_DIR}/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/Debug/libaws-crt-cpp.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-checksums/Debug/libaws-checksums.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-auth/Debug/libaws-c-auth.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-cal/Debug/libaws-c-cal.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-common/Debug/libaws-c-common.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-compression/Debug/libaws-c-compression.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-http/Debug/libaws-c-http.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-io/Debug/libaws-c-io.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-mqtt/Debug/libaws-c-mqtt.a ${PROJECT_DIR}/build/build-prod/crt/aws-crt-cpp/crt/aws-c-s3/Debug/libaws-c-s3.a ${PROJECT_DIR}/build/build-prod/lib/Debug/libaws-c-event-stream.a\nrm -rf ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\nxcodebuild -create-xcframework -library tmp-create-xcframework/libaws-sdk-cpp.a -headers tmp-create-xcframework/headers -output ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\nrm -rf tmp-create-xcframework\n";
+			shellScript = "rm -rf ${TEMP_FILES_DIR}/tmp-create-xcframework ; mkdir -p ${TEMP_FILES_DIR}/tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../aws-cpp-sdk-core/include/. ${TEMP_FILES_DIR}/tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/include/. ${TEMP_FILES_DIR}/tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/. ${TEMP_FILES_DIR}/tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-io/include/. ${TEMP_FILES_DIR}/tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-mqtt/include/. ${TEMP_FILES_DIR}/tmp-create-xcframework/headers\ncp -Rp ${PROJECT_DIR}/../aws-cpp-sdk-s3/include/. ${TEMP_FILES_DIR}/tmp-create-xcframework/headers\nlibtool -static -o ${TEMP_FILES_DIR}/tmp-create-xcframework/libaws-sdk-cpp.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/Debug/libaws-crt-cpp.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-checksums/Debug/libaws-checksums.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-auth/Debug/libaws-c-auth.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-cal/Debug/libaws-c-cal.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-common/Debug/libaws-c-common.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-compression/Debug/libaws-c-compression.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-http/Debug/libaws-c-http.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-io/Debug/libaws-c-io.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-mqtt/Debug/libaws-c-mqtt.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-s3/Debug/libaws-c-s3.a ${TARGET_BUILD_DIR}/aws-sdk-cpp/lib/Debug/libaws-c-event-stream.a\nrm -rf ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\nxcodebuild -create-xcframework -library ${TEMP_FILES_DIR}/tmp-create-xcframework/libaws-sdk-cpp.a -headers ${TEMP_FILES_DIR}/tmp-create-xcframework/headers -output ${PROJECT_DIR}/build/aws-sdk-cpp.xcframework\nrm -rf ${TEMP_FILES_DIR}/tmp-create-xcframework\n";
 			showEnvVarsInLog = 0;
 		};
 		FCD7BDAAF0A4165DB38FA397 /* Build aws-sdk-cpp */ = {
@@ -152,40 +152,24 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(PROJECT_DIR)/build/build-prod/AWSSDK.xcodeproj",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/AWSSDK.xcodeproj",
 			);
 			name = "Build aws-sdk-cpp";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
-				"$(PROJECT_DIR)/build/build-prod/aws-cpp-sdk-lambda/Debug/libaws-cpp-sdk-lambda.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
+				"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-lambda/Debug/libaws-cpp-sdk-lambda.a",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "AWSSDKCPP_BUILD_DIR=${PROJECT_DIR}/build/build-prod\ncd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO\n";
+			shellScript = "AWSSDKCPP_BUILD_DIR=${TARGET_BUILD_DIR}/aws-sdk-cpp\ncd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1AC7B2A0EF714526392F0D80 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		437F30739D8D91166FC8FBE7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		7A1B7842055BA15999574D31 /* Release */ = {
+		2A96F807D34D0FD69241BB26 /* prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -243,67 +227,15 @@
 				WARNING_CFLAGS = "-Wno-address-of-temporary";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
-			name = Release;
+			name = prod;
 		};
-		C680C55880AC48D5BCE1BAAA /* Debug */ = {
+		BD9BD23B5C52C32448457B96 /* prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_CHAR_IS_UNSIGNED_CHAR = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/src/precomp.h";
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VALUE = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-fno-exceptions",
-					"$(OTHER_CFLAGS)",
-				);
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "-Wno-address-of-temporary";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Debug;
+			name = prod;
 		};
 /* End XCBuildConfiguration section */
 
@@ -311,8 +243,7 @@
 		1369E9C23F3761A2A1837E2B /* Build configuration list for PBXProject "aws-sdk-cpp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C680C55880AC48D5BCE1BAAA /* Debug */,
-				7A1B7842055BA15999574D31 /* Release */,
+				2A96F807D34D0FD69241BB26 /* prod */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -320,8 +251,7 @@
 		B0D3E3F4D5F1675883F8A9BF /* Build configuration list for PBXAggregateTarget "aws-sdk-cpp-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1AC7B2A0EF714526392F0D80 /* Debug */,
-				437F30739D8D91166FC8FBE7 /* Release */,
+				BD9BD23B5C52C32448457B96 /* prod */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
