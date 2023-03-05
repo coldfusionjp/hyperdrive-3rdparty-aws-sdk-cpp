@@ -23,17 +23,17 @@
 				{
 					"name": "Copy custom headers",
 					"script": [
-						"cp -p ${PROJECT_DIR}/aws-cpp-sdk-core/include/aws/core/SDKConfig.h ${PROJECT_DIR}/../aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+						"cp -p ${PROJECT_DIR}/src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h ${PROJECT_DIR}/../src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
 						"cp -p ${PROJECT_DIR}/crt/aws-crt-cpp/include/aws/crt/Config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/include/aws/crt/Config.h",
 						"cp -p ${PROJECT_DIR}/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
 					],
 					"inputs": [
-						"$(PROJECT_DIR)/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+						"$(PROJECT_DIR)/src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
 						"$(PROJECT_DIR)/crt/aws-crt-cpp/include/aws/crt/Config.h",
 						"$(PROJECT_DIR)/crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
 					],
 					"outputs": [
-						"$(PROJECT_DIR)/../aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
+						"$(PROJECT_DIR)/../src/aws-cpp-sdk-core/include/aws/core/SDKConfig.h",
 						"$(PROJECT_DIR)/../crt/aws-crt-cpp/include/aws/crt/Config.h",
 						"$(PROJECT_DIR)/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
 					]
@@ -56,16 +56,18 @@
 					"name": "Create XCFramework",
 					"type": "create-xcframework",
 					"headers": [
-						"${PROJECT_DIR}/../aws-cpp-sdk-core/include",
+						"${PROJECT_DIR}/../src/aws-cpp-sdk-core/include",
 						"${PROJECT_DIR}/../crt/aws-crt-cpp/include",
+						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-auth/include",
 						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include",
 						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-io/include",
 						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-mqtt/include",
-						"${PROJECT_DIR}/../aws-cpp-sdk-s3/include"
+						"${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-sdkutils/include",
+						"${PROJECT_DIR}/../generated/src/aws-cpp-sdk-s3/include"
 					],
 					"libraries": [
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/src/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/generated/src/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/Debug/libaws-crt-cpp.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-checksums/Debug/libaws-checksums.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-auth/Debug/libaws-c-auth.a",
@@ -75,6 +77,7 @@
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-http/Debug/libaws-c-http.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-io/Debug/libaws-c-io.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-mqtt/Debug/libaws-c-mqtt.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-sdkutils/Debug/libaws-c-sdkutils.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-s3/Debug/libaws-c-s3.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/lib/Debug/libaws-c-event-stream.a"
 					],
