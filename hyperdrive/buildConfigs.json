@@ -14,27 +14,27 @@
 					"script": [
 						"AWSSDKCPP_CLIENTS=\"lambda;s3\"",
 						"AWSSDKCPP_BUILD_DIR=${TARGET_BUILD_DIR}/aws-sdk-cpp",
-						"cd ${AWSSDKCPP_BUILD_DIR} ; cmake ${PROJECT_DIR}/.. -G Xcode -DCMAKE_BUILD_TYPE=\"MinSizeRel\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON"
+						"cd ${AWSSDKCPP_BUILD_DIR} ; cmake ${PROJECT_DIR}/.. -DCMAKE_BUILD_TYPE=\"Release\" -DTARGET_ARCH=APPLE -DCMAKE_OSX_DEPLOYMENT_TARGET=\"10.13\" -DCMAKE_OSX_ARCHITECTURES=\"x86_64;arm64\" -DBUILD_ONLY=\"${AWSSDKCPP_CLIENTS}\" -DBUILD_SHARED_LIBS=OFF -DENABLE_RTTI=OFF -DENABLE_TESTING=OFF -DENABLE_ADDRESS_SANITIZER=OFF -DENABLE_SANITIZERS=OFF -DHAS_SANITIZERS=OFF -DENABLE_UNITY_BUILD=ON -DMINIMIZE_SIZE=ON"
 					],
 					"inputs": [
 						"$(PROJECT_DIR)/CMakeLists.txt"	
 					],
 					"outputs": [
-						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/AWSSDK.xcodeproj"
+						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/Makefile"
 					]
 				},
 				{
 					"name": "Build aws-sdk-cpp",
 					"script": [
 						"AWSSDKCPP_BUILD_DIR=${TARGET_BUILD_DIR}/aws-sdk-cpp",
-						"cd ${AWSSDKCPP_BUILD_DIR} ; xcodebuild -target ALL_BUILD -enableAddressSanitizer NO -enableThreadSanitizer NO -enableUndefinedBehaviorSanitizer NO"
+						"cd ${AWSSDKCPP_BUILD_DIR} ; make -j"
 					],
 					"inputs": [
-						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/AWSSDK.xcodeproj"
+						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/Makefile"
 					],
 					"outputs": [
-						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
-						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-lambda/Debug/libaws-cpp-sdk-lambda.a"
+						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-s3/libaws-cpp-sdk-s3.a",
+						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/aws-cpp-sdk-lambda/libaws-cpp-sdk-lambda.a"
 					]
 				},
 				{
@@ -51,20 +51,20 @@
 						"${PROJECT_DIR}/../generated/src/aws-cpp-sdk-s3/include"
 					],
 					"libraries": [
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/src/aws-cpp-sdk-core/Debug/libaws-cpp-sdk-core.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/generated/src/aws-cpp-sdk-s3/Debug/libaws-cpp-sdk-s3.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/Debug/libaws-crt-cpp.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-checksums/Debug/libaws-checksums.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-auth/Debug/libaws-c-auth.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-cal/Debug/libaws-c-cal.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-common/Debug/libaws-c-common.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-compression/Debug/libaws-c-compression.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-http/Debug/libaws-c-http.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-io/Debug/libaws-c-io.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-mqtt/Debug/libaws-c-mqtt.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-sdkutils/Debug/libaws-c-sdkutils.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-s3/Debug/libaws-c-s3.a",
-						"${TARGET_BUILD_DIR}/aws-sdk-cpp/lib/Debug/libaws-c-event-stream.a"
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/src/aws-cpp-sdk-core/libaws-cpp-sdk-core.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/generated/src/aws-cpp-sdk-s3/libaws-cpp-sdk-s3.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/libaws-crt-cpp.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-checksums/libaws-checksums.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-auth/libaws-c-auth.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-cal/libaws-c-cal.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-common/libaws-c-common.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-compression/libaws-c-compression.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-http/libaws-c-http.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-io/libaws-c-io.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-mqtt/libaws-c-mqtt.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-sdkutils/libaws-c-sdkutils.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-s3/libaws-c-s3.a",
+						"${TARGET_BUILD_DIR}/aws-sdk-cpp/lib/libaws-c-event-stream.a"
 					],
 					"output": "${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
 				}
