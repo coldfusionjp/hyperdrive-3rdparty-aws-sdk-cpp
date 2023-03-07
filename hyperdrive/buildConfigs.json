@@ -24,6 +24,18 @@
 					]
 				},
 				{
+					"name": "Copy generated headers into source tree",
+					"script": [
+						"cp -p ${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-common/generated/include/aws/common/config.h ${PROJECT_DIR}/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
+					],
+					"inputs": [
+						"$(TARGET_BUILD_DIR)/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-common/generated/include/aws/common/config.h"
+					],
+					"outputs": [
+						"$(PROJECT_DIR)/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
+					]
+				},
+				{
 					"name": "Build aws-sdk-cpp",
 					"script": [
 						"AWSSDKCPP_BUILD_DIR=${TARGET_BUILD_DIR}/aws-sdk-cpp",
