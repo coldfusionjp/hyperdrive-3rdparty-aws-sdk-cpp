@@ -78,6 +78,9 @@
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/crt/aws-crt-cpp/crt/aws-c-s3/libaws-c-s3.a",
 						"${TARGET_BUILD_DIR}/aws-sdk-cpp/lib/libaws-c-event-stream.a"
 					],
+					"inputs": [
+						"$(PROJECT_DIR)/../crt/aws-crt-cpp/crt/aws-c-common/include/aws/common/config.h"
+					],
 					"output": "${PROJECT_DIR}/build/aws-sdk-cpp.xcframework"
 				}
 			]
